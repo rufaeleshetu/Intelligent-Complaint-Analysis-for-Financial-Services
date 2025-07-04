@@ -1,45 +1,88 @@
-# 🧠 Intelligent Complaint Analysis for Financial Services
+# 🔍 Intelligent Complaint Analysis for Financial Services
 
-This project builds a **Retrieval-Augmented Generation (RAG)** chatbot to help internal teams at CrediTrust Financial understand customer complaints faster and more effectively.
+This project implements a **Retrieval-Augmented Generation (RAG)** chatbot system to help internal teams at CrediTrust Financial analyze and respond to customer complaints more effectively.
 
----
-
-## 📊 Project Overview
-
-- **Business Goal:** Transform raw complaint text into actionable insights for Product, Support, and Compliance teams.
-- **Tech Stack:** Python, FAISS/ChromaDB, LangChain, Open Source LLMs, Streamlit/Gradio
+It combines vector-based semantic search with language models to answer questions grounded in real customer feedback.
 
 ---
 
-## 📁 Folder Structure
+## 🎯 Objective
 
-├── data/ # Raw + cleaned data and vector DB
+Transform unstructured complaint narratives into an intelligent assistant that helps product managers, compliance officers, and support teams query and analyze customer pain points across five product categories:
+
+- Credit Cards  
+- Personal Loans  
+- Buy Now Pay Later (BNPL)  
+- Savings Accounts  
+- Money Transfers
+
+---
+
+## 🧱 Project Structure
+
+.
+├── data/ # Raw and filtered complaint data
 ├── notebooks/ # Exploratory and development notebooks
-├── src/ # Main pipeline and utility code
-├── report/ # Interim + final report
-├── app.py # Chatbot interface
-├── requirements.txt # Dependencies
-├── .gitignore # Ignored files
-
-
----
-
-## 🚧 Tasks Breakdown
-
-- **Task 1:** Data EDA & Cleaning
-- **Task 2:** Text Embedding & Vector Store
-- **Task 3:** RAG Pipeline Logic & Evaluation
-- **Task 4:** Interactive Chat Interface
+├── report/ # Interim and final reports
+├── src/ # Source code
+│ ├── utils/ # Modular utility classes
+├── vector_store/ # Serialized vector index & metadata
+└── README.md # Project overview (this file)
 
 ---
 
-## 📅 Submission
+## ✅ Task Coverage
 
-- 🟡 **Interim:** 06 July 2025 (Task 1 & 2)
-- ✅ **Final:** 08 July 2025 (All Tasks + UI + Report)
+### Task 1: EDA and Preprocessing
+
+- Loaded and analyzed the CFPB complaint dataset
+- Filtered relevant product categories
+- Cleaned and saved data to `data/filtered_complaints.csv`
+
+### Task 2: Chunking, Embedding & Indexing
+
+- Used LangChain’s `RecursiveCharacterTextSplitter` for chunking  
+- Embedded text using `all-MiniLM-L6-v2` from Sentence Transformers  
+- Stored embeddings in FAISS index  
+- Saved index + metadata to `vector_store/`
+
+### Task 3+: (Upcoming)
+
+- Implementing a retriever system and LLM-based question answering
+- Creating an interactive chatbot with Streamlit/Gradio
 
 ---
 
-## ✍️ Maintainer
+## 💡 Technologies Used
 
-Rufael Eshetu – KAIM 5 Trainee
+- `langchain` for text chunking
+- `sentence-transformers` for semantic embedding
+- `faiss-cpu` for vector similarity search
+- `pandas`, `tqdm`, `pickle` for processing and saving
+- `streamlit` or `gradio` for UI (in Task 4)
+
+---
+
+## 📁 Key Files
+
+### 🔹 `src/`
+- `embedding_pipeline.py` – Main runner for Task 2
+- `config.py` – Centralized chunking/embedding settings
+- `utils/text_embedder.py` – Class for chunking and embedding
+- `utils/vector_indexer.py` – Class for storing embeddings and metadata in FAISS
+
+### 🔹 `vector_store/`
+- `faiss_index.index` – Saved FAISS vector store
+- `metadata.pkl` – Metadata for each embedded chunk
+
+### 🔹 `report/`
+- `interim_report.md` – Strategy and findings for Tasks 1 & 2
+- `final_report.md` – To be completed for Tasks 3 & 4
+
+---
+
+## 🚀 How to Run Task 2
+
+```bash
+# Inside your conda or pip environment:
+python src/embedding_pipeline.py
