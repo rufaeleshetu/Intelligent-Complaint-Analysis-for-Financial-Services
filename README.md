@@ -85,4 +85,4 @@ Transform unstructured complaint narratives into an intelligent assistant that h
 
 ```bash
 # Inside your conda or pip environment:
-python src/embedding_pipeline.py
+python src/embedding_pipeline.py# Task 4 completed ✅
